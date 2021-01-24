@@ -1,12 +1,28 @@
 import Link from "next/link";
+import Head from "next/head";
+import Router from "next/router";
+import NProgress from "nprogress";
+
+Router.onRouterChangeStart = url =>{
+    console.log(url);
+    NProgress.start();
+}
+
+Router.onRouterChangeComplete= ()=> NProgress.done();
+Router.onRouterChangeError= ()=> NProgress.done();
 
 export default({children, title})=>(
     <div className="root">
-        <header className="header">
+        <Head>
+            <title>Aman Portfolio</title>
+             </Head>
+        <header>
             <Link href="/">
                 <a>Home</a></Link>
             <Link href="/about"><a>About</a></Link>
             <Link href="/hireme"><a>Hire Me</a></Link>
+
+            <Link href="/blog"><a>Blogs</a></Link>
         </header>
         <h1>{title}</h1>
             {children}
@@ -18,7 +34,7 @@ export default({children, title})=>(
         align-items: center;
         flex-direction:column;
    }
-   .header{
+   header{
        width:100%;
        display:flex;
        justify-content:space-around;
